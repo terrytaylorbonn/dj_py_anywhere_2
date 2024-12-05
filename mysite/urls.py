@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from django.contrib.auth import views 
 
 #from drf-yasg import openapi
 #from drf-yasg.views import get_schema_view as swagger_get_schema_view
-
 # schema_view = swagger_get_schema_view(
 #     openapi.Info(
 #         title="Posts API",
@@ -29,10 +29,11 @@ from django.urls import path, include, re_path
 #     public=True,
 # )
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
+    path('accounts/', views.LoginView.as_view(), name='login'),
+    path('accounts/', views.LogoutView.as_view(), name='logout'),
     path('api/v1/', 
         include([
             path('post/', include(('post.api.urls', 'post'), namespace='posts')),
@@ -45,6 +46,4 @@ urlpatterns = [
     # re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     # path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     # path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-
-
 ]

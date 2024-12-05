@@ -22,9 +22,21 @@
     <header class="page-header">
       <div class="container">
         {% if user.is_authenticated %}
+        <a href="{% url 'post_draft_list' %}" class="top-menu"
+          >{% include './icons/pencil-square.svg' %}</a
+        >
         <a href="{% url 'post_new' %}" class="top-menu">
           {% include './icons/file-earmark-plus.svg' %}
         </a>
+
+        <a href="{% url 'logout' %}" class="top-menu">
+          {% include './icons/door-open-fill.svg' %}
+        </a>
+        {% else %}
+        <a href="{% url 'login' %}" class="top-menu">
+          {% include './icons/door-open.svg' %}
+        </a>
+
         {% endif %}
         <h1>
           <a href="/">from base.html (this is header inside body)</a>
